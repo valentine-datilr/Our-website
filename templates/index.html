@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plant Match</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <h1>🪴 Plant Match 🪴</h1>
+  <p class="subtitle">Tell us about your home and find your perfect houseplant!</p>
+
+  {% if error %}
+    <p class="error">{{ error }}</p>
+  {% endif %}
+
+  <form method="get" action="/">
+    <label>☀️ Light
+      <select name="light">
+        <option value="">Any</option>
+        {% for light in lights %}
+          <option value="{{ light }}" {% if light == selected_light %}selected{% endif %}>{{ light }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>💧 Humidity
+      <select name="humidity">
+        <option value="">Any</option>
+        {% for humidity in humidities %}
+          <option value="{{ humidity }}" {% if humidity == selected_humidity %}selected{% endif %}>{{ humidity }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>🐾 Pets at home
+      <select name="pets">
+        <option value="">No</option>
+        <option value="yes" {% if selected_pets == "yes" %}selected{% endif %}>Yes (only pet-safe plants)</option>
+      </select>
+    </label>
+
+    <button type="submit">Find my plants 💚</button>
+  </form>
+
+  {% if submitted %}
+    <p class="count">{{ plants|length }} plants found out of {{ total }}</p>
+
+    {% for plant in plants %}
+      <div class="plant">
+        <h2>🌿 {{ plant.name }}</h2>
+        <p class="latin">{{ plant.latin }}</p>
+        <p>☀️ Light: {{ plant.light }}</p>
+        <p>💧 Humidity: {{ plant.humidity }}</p>
+        <p>🌱 Shape: {{ plant.habit }}</p>
+        <p>🐾 Pets: {{ plant.pets }}</p>
+      </div>
+    {% else %}
+      <p class="count">No plant matches your home 😢 Try changing an answer!</p>
+    {% endfor %}
+  {% endif %}
+
+</body>
+</html>
