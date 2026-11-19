@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Plant Match</title>
+  <title>GreenFlag: Houseplant Matchmaker</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
 
-  <h1>🪴 Plant Match 🪴</h1>
-  <p class="subtitle">Tell us about your home and find your perfect houseplant!</p>
+  <h1>GreenFlag: Houseplant Matchmaker</h1>
+  <p class="subtitle">Find the perfect plant for your home! This is the only website that will match you with genuine green flags. No matter what kind of plant you’re looking for, we have the one for you. Never kill a houseplant again: use GreenFlag!</p>
+  <h2>How it works</h2>
+  <p>Tell us more about the room you would like your new friend to be in and we will find you the perfect match.</p>
+  <h2>Try it out!</h2>
 
   {% if error %}
     <p class="error">{{ error }}</p>
   {% endif %}
 
   <form method="get" action="/">
-    <label>☀️ Light
+    <label> Light
       <select name="light">
         <option value="">Any</option>
         {% for light in lights %}
@@ -24,7 +28,7 @@
       </select>
     </label>
 
-    <label>💧 Humidity
+    <label> Humidity
       <select name="humidity">
         <option value="">Any</option>
         {% for humidity in humidities %}
@@ -33,14 +37,14 @@
       </select>
     </label>
 
-    <label>🐾 Pets at home
+    <label> Pets at home
       <select name="pets">
         <option value="">No</option>
         <option value="yes" {% if selected_pets == "yes" %}selected{% endif %}>Yes (only pet-safe plants)</option>
       </select>
     </label>
 
-    <button type="submit">Find my plants 💚</button>
+    <button type="submit">Find my plants </button>
   </form>
 
   {% if submitted %}
@@ -50,15 +54,32 @@
       <div class="plant">
         <h2>🌿 {{ plant.name }}</h2>
         <p class="latin">{{ plant.latin }}</p>
-        <p>☀️ Light: {{ plant.light }}</p>
-        <p>💧 Humidity: {{ plant.humidity }}</p>
-        <p>🌱 Shape: {{ plant.habit }}</p>
-        <p>🐾 Pets: {{ plant.pets }}</p>
+        <p>Light: {{ plant.light }}</p>
+        <p>Humidity: {{ plant.humidity }}</p>
+        <p>Shape: {{ plant.habit }}</p>
+        <p>Pets: {{ plant.pets }}</p>
       </div>
     {% else %}
-      <p class="count">No plant matches your home 😢 Try changing an answer!</p>
+      <p class="count">No plant matches your home Try changing an answer!</p>
     {% endfor %}
   {% endif %}
 
+    <h3>Sunlight Exposure</h3>
+    <p>Sunlight exposure corresponds to how much sunlight your room is getting</p>
+    <ul>
+  <li>Full sunlight (direct rays of sun during multiple hours a day), usually a south-facing window</li>
+  <li>Medium (bright indirect light) = ideal for most plants, close to a sun-exposed window but not in direct sunlight, usually an east- or west-facing window, no direct light around noon</li>
+  <li>Low light (also called semi-shade) = somewhere further away from a window, no direct sunlight during the day</li>
+</ul>
+  <h3>Humidity Level</h3>
+  <ul>
+    <li>Humidity in most homes is around 30%, you can use a humidifier or spray water multiple times a day around the plant to increase humidity. Alternatively, if you have a well lit bathroom or kitchen, you can put plants there!</li>
+  </ul>
+
+  <footer>
+  <p>Contact us:</p>
+  <a href="https://www.linkedin.com/in/valentine-datil-rioual">Valentine Datil-Rioual</a>
+  <a href="https://www.linkedin.com/in/damian-peška-455717229">Damian Peška</a>
+</footer>
 </body>
 </html>
